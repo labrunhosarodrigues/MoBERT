@@ -17,6 +17,7 @@ from sklearn.model_selection import KFold
 from sklearn.linear_model import *
 from sklearn.svm import SVR
 from utils.stat_tracking import *
+from configs import BASE_CONFIG
 
 import itertools
 
@@ -44,7 +45,7 @@ def load_pickle(filepath):
 def parse_arguments():
     parser = argparse.ArgumentParser(description = "Process arguments for initial training of motion chunk encoder")
     parser.add_argument("--device", "-d", default = 0, type = str, help = "Device to utilize (-1 = CPU) (> - 1 = GPU)")
-    parser.add_argument("--config", "-c", default = Path("configs/base_config.yml"))
+    parser.add_argument("--config", "-c", default = BASE_CONFIG)
     parser.add_argument("--resume", "-r", default="", help="Checkpoint to resume training from. ")
     parser.add_argument("--reset_scheduler", action="store_true")
     args = parser.parse_args()
