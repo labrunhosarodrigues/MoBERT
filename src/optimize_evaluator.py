@@ -25,6 +25,7 @@ from utils.stat_tracking import *
 from sklearn.decomposition import PCA
 from sklearn.pipeline import make_pipeline
 from sklearn import preprocessing
+from .configs import BASE_CONFIG
 
 import itertools
 from torch.optim.lr_scheduler import ReduceLROnPlateau
@@ -59,7 +60,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description = "Process arguments for initial training of motion chunk encoder")
     parser.add_argument("--device", "-d", default = 0, type = str, help = "Device to utilize (-1 = CPU) (> - 1 = GPU)")
     parser.add_argument("--red_dim", default = 128, type = int, help = "")
-    parser.add_argument("--config", "-c", default = Path("configs/base_config.yml"))
+    parser.add_argument("--config", "-c", default = BASE_CONFIG)
     parser.add_argument("--checkpoint", "-ck", default="", help="")
     parser.add_argument("--retrain_autoencoders", action="store_true")
     args = parser.parse_args()
