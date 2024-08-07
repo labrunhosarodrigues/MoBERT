@@ -492,7 +492,9 @@ class HumanML3DDataset(Dataset):
             example_data = np.load(sample_data.SAMPLE000000)
             example_data = example_data.reshape(len(example_data), -1, 3)
             example_data = torch.from_numpy(example_data)
-            tgt_skel = Skeleton(self.n_raw_offsets, self.kinematic_chain, 'cpu')
+            n_raw_offsets = torch.from_numpy(t2m_raw_offsets)
+            kinematic_chain = t2m_kinematic_chain
+            tgt_skel = Skeleton(n_raw_offsets, kinematic_chain, device)
 
             params = {
                 "l_idx1": 5,
@@ -500,12 +502,12 @@ class HumanML3DDataset(Dataset):
                 "fid_r": [8, 11],
                 "fid_l": [7, 10],
                 "face_joint_indx": [2, 1, 17, 16],
-                "n_raw_offsets": torch.from_numpy(t2m_raw_offsets),
-                "kinematic_chain": t2m_kinematic_chain,
+                "n_raw_offsets": n_raw_offsets,
+                "kinematic_chain": kinematic_chain,
                 "tgt_offsets": tgt_skel.get_offsets_joints(example_data[0])
             }
 
-            self.feat_data = self.load_motion_data(path, device, params)
+            self.feat_data = self.load_motion_data(path, params)
 
             with open(cache_path / 'feat_data.obj', 'wb') as fileobj:
                 pickle.dump(self.feat_data, fileobj)
