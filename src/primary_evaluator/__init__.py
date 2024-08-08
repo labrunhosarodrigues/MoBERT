@@ -27,6 +27,7 @@ Resources provided in this module are:
 import io
 import importlib.resources
 from pathlib import Path
+import os
 
 # local
 
@@ -52,9 +53,25 @@ def get_file_data(resource):
     """
     Load ByteIO buffer with files in archive data.
     """
+    if not os.path.exists(ARCHIVE):
+        raise FileNotFoundError(
+            """No archive found at expected location.
+            Please download it from:
+            https://drive.usercontent.google.com/download?id=1gmljNRJKf_IujUIlcmCl9Q6mZI_Qceiv&export=download&authuser=0
 
+            And run the function `save_primary_evaluator_archive(path_to_downloaded_file)`
+            to properly install the archive."""
+        )
     with ZipFile(ARCHIVE) as zip:
         with zip.open(resource) as fid:
             data = io.BytesIO(fid.read())
     
     return data
+
+
+def save_primary_evaluator_archive(zip_path):
+    """
+    Properly save ZIP archive as a resource in this package.
+    """
+
+    os.rename(zip_path, ARCHIVE)
