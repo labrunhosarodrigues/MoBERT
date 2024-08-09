@@ -18,7 +18,7 @@ from sentence_transformers import SentenceTransformer
 import concurrent.futures
 from tokenizers import Tokenizer, pre_tokenizers, models, trainers, processors, Encoding
 
-from src import primary_evaluator
+from mobert import primary_evaluator
 
 class TMEvalTokenizer:
     def __init__(self, tokenization_method, training_file_path, vocab_size, saved_tokenizer_path="", use_seg_embs=True):
