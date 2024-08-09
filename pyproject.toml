@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools >= 64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "MoBERT"
+description = "Unified framework for Human Motion Generation Evaluation."
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["human motion generation", "metrics"]
+dynamic = ['version']
+dependencies = [
+    "pyyaml",
+    "torch~=2.0.0",
+    "pandas~=2.0.2",
+    "scikit-learn~=1.2.2",
+    "scipy~=1.10.1",
+    "tqdm",
+    "sentence-transformers",
+]
+requires-python = ">= 3.8"
+authors = [
+    {name = "Jordan Voas", email = "jvoas@utexas.edu"},
+    {name = "Yili Wang", email = "ywang98@utexas.edu"},
+    {name = "Qixing Huang", email = "huangqx@cs.utexas.edu"},
+    {name = "Raymond Mooney", email = "mooney@cs.utexas.edu"}
+]
+maintainers = [
+    {name = "Lourenco Abrunhosa Rodrigues", email = "lourenco@uni-bremen.de"}
+]
+classifiers = [
+    "Development Status :: 5",
+    "Intended Audience :: Researchers",
+    "Topic :: Data Generation :: Evaluation Metrics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "mobert.__version__"}
