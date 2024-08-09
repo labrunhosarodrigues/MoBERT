@@ -26,7 +26,6 @@ Resources provided in this module are:
 # built-in
 import io
 import importlib.resources
-from pathlib import Path
 import os
 
 # local
@@ -39,14 +38,14 @@ from zipfile import ZipFile
 __package_path = importlib.resources.files(__name__)
 
 ARCHIVE = __package_path / 'archive.zip'
-BASE_ARCHIVE = Path("primary_evaluator/std_bpe2000")
-BEST_FAITHFULNESS_CHECKPOINT = BASE_ARCHIVE / 'best_faithfulness_checkpoint.pth'
-LATEST_CHECKPOINT = BASE_ARCHIVE / 'latest_checkpoint.pth'
-RIDGE_FAITHFULNESS = BASE_ARCHIVE / 'Ridge_PROB_CLS_MOTIONTEXT_Faithfulness.obj'
-RIDGE_NATURALNESS = BASE_ARCHIVE / 'Ridge_PROB_CLS_MOTIONTEXT_Naturalness.obj'
-SVR_FAITHFULNESS = BASE_ARCHIVE / 'SVR_PROB_CLS_MOTIONTEXT_Faithfulness.obj'
-SVR_NATURALNESS = BASE_ARCHIVE / 'SVR_PROB_CLS_MOTIONTEXT_Naturalness.obj'
-TOKENIZER = BASE_ARCHIVE / 'tokenizer.tk'
+BASE_ARCHIVE = "primary_evaluator/std_bpe2000"
+BEST_FAITHFULNESS_CHECKPOINT = os.path.join(BASE_ARCHIVE, 'best_faithfulness_checkpoint.pth')
+LATEST_CHECKPOINT = os.path.join(BASE_ARCHIVE, 'latest_checkpoint.pth')
+RIDGE_FAITHFULNESS = os.path.join(BASE_ARCHIVE, 'Ridge_PROB_CLS_MOTIONTEXT_Faithfulness.obj')
+RIDGE_NATURALNESS = os.path.join(BASE_ARCHIVE, 'Ridge_PROB_CLS_MOTIONTEXT_Naturalness.obj')
+SVR_FAITHFULNESS = os.path.join(BASE_ARCHIVE, 'SVR_PROB_CLS_MOTIONTEXT_Faithfulness.obj')
+SVR_NATURALNESS = os.path.join(BASE_ARCHIVE, 'SVR_PROB_CLS_MOTIONTEXT_Naturalness.obj')
+TOKENIZER = os.path.join(BASE_ARCHIVE, 'tokenizer.tk')
 
 
 def get_file_data(resource):
