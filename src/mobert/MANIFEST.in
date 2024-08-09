@@ -1,0 +1,3 @@
+include src/mobert/configs/*.yml
+include src/mobert/human_body_prior/body_model/parts_segm/smplh/parts_segm.pkl
+include src/mobert/sample_data/*.npy
