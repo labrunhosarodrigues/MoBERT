@@ -2,7 +2,7 @@
 #from collections import OrderedDict
 from pathlib import Path
 import pickle
-#import random
+import random
 
 #import tqdm
 import numpy as np
@@ -18,6 +18,8 @@ from sentence_transformers import SentenceTransformer
 import concurrent.futures
 from tokenizers import Tokenizer, pre_tokenizers, models, trainers, processors, Encoding
 
+from src import primary_evaluator
+
 class TMEvalTokenizer:
     def __init__(self, tokenization_method, training_file_path, vocab_size, saved_tokenizer_path="", use_seg_embs=True):
         self.use_seg_embs = use_seg_embs
@@ -25,8 +27,11 @@ class TMEvalTokenizer:
         self.training_file_path = training_file_path
         self.special_tokens = ["[PAD]", "[UNK]", "[MASK]", "[CLS]", "[MOT]", "[SOT]"]
 
-        if saved_tokenizer_path != "":
-            self.tokenizer = Tokenizer.from_file(str(saved_tokenizer_path))
+        if saved_tokenizer_path:
+            if type(saved_tokenizer_path) is str:
+                self.tokenizer = Tokenizer.from_file(str(saved_tokenizer_path))
+            else:
+                self.tokenizer = Tokenizer.from_buffer(primary_evaluator.get_file_data(primary_evaluator.TOKENIZER))
         else:
             if self.tokenization_method == "WordPiece":
                 model = models.WordPiece(unk_token="[UNK]", continuation_token="##")
@@ -230,8 +235,14 @@ class MotionTextEvalBERT(nn.Module):
             self.group_norm = primary_evaluator_model_config["group_norm"]
             self.load_trained_regressors_path = load_trained_regressors_path
             if (self.load_trained_regressors_path):
-                self.naturalness_regressor = load_pickle(Path(self.load_trained_regressors_path) / "SVR_PROB_CLS_MOTIONTEXT_Naturalness.obj")
-                self.faithfulness_regressor = load_pickle(Path(self.load_trained_regressors_path) / "SVR_PROB_CLS_MOTIONTEXT_Faithfulness.obj")
+                if type(self.load_trained_regressors_path) is str:
+                    nat_stream = Path(self.load_trained_regressors_path) / "SVR_PROB_CLS_MOTIONTEXT_Naturalness.obj"
+                    faith_stream = Path(self.load_trained_regressors_path) / "SVR_PROB_CLS_MOTIONTEXT_Faithfulness.obj"
+                else:
+                    nat_stream = primary_evaluator.get_file_data(primary_evaluator.SVR_NATURALNESS)
+                    faith_stream = primary_evaluator.get_file_data(primary_evaluator.SVR_FAITHFULNESS)
+                self.naturalness_regressor = load_pickle(nat_stream)
+                self.faithfulness_regressor = load_pickle(faith_stream)
 
             self.frame_encoder = nn.Sequential(
                 nn.Linear(chunk_encoder_config["input_dim"], chunk_encoder_config["frame_enc_dim"]),
