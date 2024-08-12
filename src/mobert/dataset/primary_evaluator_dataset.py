@@ -16,7 +16,7 @@ import os
 import pickle
 
 # local
-from mobert.human_body_prior.body_model.body_model import BodyModel
+from human_body_prior.body_model.body_model import BodyModel
 from mobert.metrics import *
 from mobert.common.skeleton import Skeleton
 from mobert.common.quaternion import *

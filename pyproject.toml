@@ -17,6 +17,7 @@ dependencies = [
     "scipy~=1.10.1",
     "tqdm",
     "sentence-transformers",
+    "human-body-prior"
 ]
 requires-python = ">= 3.8"
 authors = [
