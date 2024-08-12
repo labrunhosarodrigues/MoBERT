@@ -227,8 +227,11 @@ class TMEvalTokenizer:
         return final_embs, mask, text_ids, text_mask
 
 def load_pickle(filepath):
-    with open(filepath, "rb") as f:
-        return pickle.load(f)
+    if type(filepath) is str:
+        with open(filepath, "rb") as f:
+            return pickle.load(f)
+    else:
+        return pickle.load(filepath)
 
 class MotionTextEvalBERT(nn.Module):
         def __init__(self, primary_evaluator_model_config, chunk_encoder_config, tokenizer_and_embedders_config, tokenizer_path="", load_trained_regressors_path = ""):
