@@ -7,5 +7,5 @@ Version tracker.
 
 """
 
-__VERSION__ = (1, 0, 0)
+__VERSION__ = (1, 0, 1)
 __version__ = '.'.join(map(str, __VERSION__))
