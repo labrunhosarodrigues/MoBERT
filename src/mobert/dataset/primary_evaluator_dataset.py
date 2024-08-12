@@ -16,7 +16,6 @@ import os
 import pickle
 
 # local
-from human_body_prior.body_model.body_model import BodyModel
 from mobert.metrics import *
 from mobert.common.skeleton import Skeleton
 from mobert.common.quaternion import *
@@ -30,6 +29,7 @@ from torch.utils.data import Dataset
 import numpy as np
 import tqdm
 import pandas as pd
+from human_body_prior.body_model.body_model import BodyModel
 
 
 def convert_vel_acel(pos_seq):
