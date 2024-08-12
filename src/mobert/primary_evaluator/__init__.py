@@ -39,7 +39,7 @@ __package_path = importlib.resources.files(__name__)
 
 ARCHIVE = __package_path / 'archive.zip'
 BASE_ARCHIVE = "primary_evaluator/std_bpe2000"
-BEST_FAITHFULNESS_CHECKPOINT = os.path.join(BASE_ARCHIVE, 'best_faithfulness_checkpoint.pth')
+BEST_FAITHFULNESS_CHECKPOINT = os.path.join(BASE_ARCHIVE, 'best_Faithfulness_checkpoint.pth')
 LATEST_CHECKPOINT = os.path.join(BASE_ARCHIVE, 'latest_checkpoint.pth')
 RIDGE_FAITHFULNESS = os.path.join(BASE_ARCHIVE, 'Ridge_PROB_CLS_MOTIONTEXT_Faithfulness.obj')
 RIDGE_NATURALNESS = os.path.join(BASE_ARCHIVE, 'Ridge_PROB_CLS_MOTIONTEXT_Naturalness.obj')
