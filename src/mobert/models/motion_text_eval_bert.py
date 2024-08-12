@@ -1,24 +1,33 @@
+# -*- coding: utf-8 -*-
+"""
+models.motion_text_eval_bert
+----------------------------
 
-#from collections import OrderedDict
+MoBERT model definition
+"""
+# Imports
+
+# built-in
+import os
 from pathlib import Path
 import pickle
 import random
 
-#import tqdm
+# local
+from mobert.utils.stat_tracking import *
+from mobert import primary_evaluator
+
+# 3rd-party
 import numpy as np
 import torch
 import torch.nn as nn
-#from models.motion_chunk_vae import *
-import os
-#from torch.nn.utils.rnn import pad_sequence
-
-from utils.stat_tracking import *
-os.environ['TOKENIZERS_PARALLELISM'] = 'false'
 from sentence_transformers import SentenceTransformer
 import concurrent.futures
 from tokenizers import Tokenizer, pre_tokenizers, models, trainers, processors, Encoding
 
-from mobert import primary_evaluator
+
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+
 
 class TMEvalTokenizer:
     def __init__(self, tokenization_method, training_file_path, vocab_size, saved_tokenizer_path="", use_seg_embs=True):
