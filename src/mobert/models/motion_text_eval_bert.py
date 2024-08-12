@@ -40,7 +40,7 @@ class TMEvalTokenizer:
             if type(saved_tokenizer_path) is str:
                 self.tokenizer = Tokenizer.from_file(str(saved_tokenizer_path))
             else:
-                self.tokenizer = Tokenizer.from_buffer(primary_evaluator.get_file_data(primary_evaluator.TOKENIZER))
+                self.tokenizer = Tokenizer.from_buffer(primary_evaluator.get_file_data(primary_evaluator.TOKENIZER).read())
         else:
             if self.tokenization_method == "WordPiece":
                 model = models.WordPiece(unk_token="[UNK]", continuation_token="##")
