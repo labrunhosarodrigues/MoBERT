@@ -16,13 +16,13 @@ import os
 import pickle
 
 # local
-from human_body_prior.body_model.body_model import BodyModel
-from metrics import *
-from common.skeleton import Skeleton
-from common.quaternion import *
-from paramUtil import *
-from utils.stat_tracking import *  
-import sample_data
+from mobert.human_body_prior.body_model.body_model import BodyModel
+from mobert.metrics import *
+from mobert.common.skeleton import Skeleton
+from mobert.common.quaternion import *
+from mobert.paramUtil import *
+from mobert.utils.stat_tracking import *  
+import mobert.sample_data as sample_data
 
 # 3rd-party
 import torch
