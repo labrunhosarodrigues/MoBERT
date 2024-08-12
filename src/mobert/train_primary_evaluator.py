@@ -1,25 +1,40 @@
-import argparse
+# -*- coding: utf-8 -*-
+"""
+mobert.train_primary_evaluator
+------------------------------
+
+Main script for MoBERT model training.
+
+"""
+# Imports
+
+# built-in
 import os
-import random
 import yaml
+import random
+import argparse
+import itertools
 from pathlib import Path
+
+# local
+from mobert.configs import BASE_CONFIG
+from mobert.utils.stat_tracking import *
+from mobert.models.motion_text_eval_bert import *
+from mobert.dataset.primary_evaluator_dataset import *
+
+# 3rd-party
 import torch
 import numpy
-from tqdm import tqdm
-from torch.utils.tensorboard import SummaryWriter
-from dataset.primary_evaluator_dataset import *
-from torch.utils.data import DataLoader
-from models.motion_text_eval_bert import *
-from torch.optim import lr_scheduler
-from torch.nn.utils import clip_grad_norm_
 import scipy.stats as scistat
-from sklearn.model_selection import KFold
-from sklearn.linear_model import *
+from tqdm import tqdm
+from torch.optim import lr_scheduler
+from torch.utils.data import DataLoader
+from torch.nn.utils import clip_grad_norm_
+from torch.utils.tensorboard import SummaryWriter
 from sklearn.svm import SVR
-from utils.stat_tracking import *
-from configs import BASE_CONFIG
+from sklearn.linear_model import *
+from sklearn.model_selection import KFold
 
-import itertools
 
 def generate_fit_feature_combinations(fit_features):
     feature_keys = list(fit_features.keys())

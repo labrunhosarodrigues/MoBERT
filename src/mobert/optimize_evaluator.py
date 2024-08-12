@@ -1,34 +1,39 @@
-import argparse
-from collections import defaultdict
-from multiprocessing import Pool
-import os
-import random
-import yaml
-from pathlib import Path
-import torch
-import numpy
-from tqdm import tqdm
-from torch.utils.tensorboard import SummaryWriter
-from dataset.primary_evaluator_dataset import *
-from torch.utils.data import DataLoader
-from models.motion_text_eval_bert import *
-from torch.optim import lr_scheduler
-from torch.nn.utils import clip_grad_norm_
-import scipy.stats as scistat
-from sklearn.model_selection import KFold
-from sklearn.linear_model import *
-from sklearn.neural_network import MLPRegressor
-from sklearn.tree import DecisionTreeRegressor, ExtraTreeRegressor
-from sklearn.svm import SVR
-import sklearn
-from utils.stat_tracking import *
-from sklearn.decomposition import PCA
-from sklearn.pipeline import make_pipeline
-from sklearn import preprocessing
-from .configs import BASE_CONFIG
+# -*- coding: utf-8 -*-
+"""
+mobert.optimize_evaluator
+-------------------------
 
+main script to optimize MoBERT faithfulness and naturalness regressors.
+"""
+# Imports
+
+# built-in
+import os
+import yaml
+import random
+import argparse
 import itertools
-from torch.optim.lr_scheduler import ReduceLROnPlateau
+from pathlib import Path
+
+# local
+from mobert.configs import BASE_CONFIG
+from mobert.utils.stat_tracking import *
+from mobert.models.motion_text_eval_bert import *
+from mobert.dataset.primary_evaluator_dataset import *
+
+# 3rd-party
+import torch
+import scipy.stats as scistat
+from tqdm import tqdm
+from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
+from sklearn.svm import SVR
+from sklearn import preprocessing
+from sklearn.linear_model import *
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import KFold
+from sklearn.pipeline import make_pipeline
+
 
 def save_pickle(obj, filepath):
     with open(filepath, "wb") as f:

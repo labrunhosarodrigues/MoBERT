@@ -1,9 +1,21 @@
-import os
+# -*- coding: utf-8 -*-
+"""
+mobert.get_opt
+--------------
+
+Option loading
+"""
+# Imports
+
+# built-in
 from argparse import Namespace
-from pathlib import Path
 import re
 from os.path import join as pjoin
-from word_vectorizer import POS_enumerator
+
+# local
+from mobert.word_vectorizer import POS_enumerator
+
+# 3rd-party
 
 
 def is_float(numStr):
