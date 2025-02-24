@@ -58,7 +58,7 @@ def get_file_data(resource):
             Please download it from:
             https://drive.usercontent.google.com/download?id=1gmljNRJKf_IujUIlcmCl9Q6mZI_Qceiv&export=download&authuser=0
 
-            And run the function `save_primary_evaluator_archive(path_to_downloaded_file)`
+            And run the function `mobert.primary_evaluator.save_primary_evaluator_archive(path_to_downloaded_file)`
             to properly install the archive."""
         )
     with ZipFile(ARCHIVE) as zip:
